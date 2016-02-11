@@ -1,0 +1,21 @@
+PosDepPath
+Word
+Position
+Pos
+DepDepPath
+PredLemma
+ChildWordSet
+RightDepPos
+PredPos
+RightDepWord
+PredSense
+Deprel
+PredParentWord
+LeftDepPos
+PredWord
+C Position_PredSense
+C Pos_PredSense
+C DepDepPath_Position
+C Deprel_PredParentWord
+C LeftDepPos_PredWord
+C ChildWordSet_PredSense

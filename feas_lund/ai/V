@@ -1,0 +1,19 @@
+DepDepPath
+Pos
+Deprel
+PosDepPath
+RightSiblingWord
+Word
+PredParentWord
+PredParentPos
+Position
+PredSense
+RightSiblingPos
+ChildDepSet
+PredDeprel
+C Deprel_DepDepPath
+C PosDepPath_RightSiblingPos
+C Deprel_ChildDepSet
+C Deprel_Pos
+C LeftDepPos_RightDepPos
+C Deprel_PredDeprel

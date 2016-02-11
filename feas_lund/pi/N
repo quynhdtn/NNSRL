@@ -1,0 +1,16 @@
+Word
+Lemma
+Pos
+Deprel
+ParentWord
+ParentPos
+ChildWordSet
+ChildPosSet
+DepSubCat
+C ChildWordSet_ParentWord
+C DepSubCat_ParentWord
+C ChildWordSet_ParentPos
+C Pos_ParentWord
+C ChildWordSet_Pos
+ChildWordDepSet
+ChildPosDepSet

@@ -1,0 +1,15 @@
+ChildWordSet
+ParentWord
+DepSubCat
+ChildPosSet
+ParentPos
+Pos
+Deprel
+ChildDepSet
+C ChildWordSet_ParentWord
+C DepSubCat_ParentWord
+C ChildWordSet_ParentPos
+C Pos_ParentWord
+C ChildWordSet_Pos
+ChildWordDepSet
+ChildPosDepSet
