@@ -49,9 +49,9 @@ public class Pipeline {
     public static void main(String[] args) throws IOException {
      //
     //  Pipeline srl  = new Pipeline("/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/feas_lund","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/temps2","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/scripts");
-        Pipeline srl  = new Pipeline("/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/temps","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/temps","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/scripts");
+    //    Pipeline srl  = new Pipeline("/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/temps","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/temps","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/scripts");
 
-    //    Pipeline srl  = new Pipeline("feas_lund","temps","scripts");
+        Pipeline srl  = new Pipeline("feas_lund","temps","scripts");
 
     //    String input = "/Users/quynhdo/Documents/WORKING/MYWORK/EACL/CoNLL2009-ST-English2/CoNLL2009-ST-English-evaluation-ood.txt";
         String input = args[0];
