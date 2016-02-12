@@ -18,7 +18,7 @@ public class CojoinFeature extends  Feature{
 
     public CojoinFeature(FeatureName name){
         super(name);
-        vocabulary = new ArrayList<>();
+     //   vocabulary = new ArrayList<>();
         elements = new ArrayList<>();
     }
 
