@@ -136,37 +136,39 @@ public class DependencyUtil {
 
     public String getDependencyPath(Word scr, Word trg, WordData d ){
 
-        Tuple2<List<Word>,List<Integer>> scr_to_roota =getPathToRoot(scr);
-        Tuple2<List<Word>,List<Integer>> trg_to_roota =getPathToRoot(trg);
+      //  Tuple2<List<Word>,List<Integer>> scr_to_roota =getPathToRoot(scr);
+     //   Tuple2<List<Word>,List<Integer>> trg_to_roota =getPathToRoot(trg);
 
-        List<Word> scr_to_root = scr_to_roota._1();
-        List<Word> trg_to_root = trg_to_roota._1();
+        List<Word> scr_to_root = getPathToRoot(scr);
+        List<Word> trg_to_root = getPathToRoot(trg);
 
      //   List<Integer>scr_to_root2 = scr_to_roota._2();
-        List<Integer>trg_to_root2 = trg_to_roota._2();
+      //  List<Integer>trg_to_root2 = trg_to_roota._2();
 
 
 
         StringBuilder sb=new StringBuilder();
         int s1 = scr_to_root.size();
         int cmidx =0;
-        for (int i=0;i<s1;++i){
-            sb.append(scr_to_root.get(i).getData(d));
+            for (int i = 0; i < s1; ++i) {
+                sb.append(scr_to_root.get(i).getData(d));
 
-          //  if (trg_to_root.contains(scr_to_root.get(i))){
-            if (trg_to_root2.contains(scr_to_root.get(i).getId())){
-                sb.append("!down!");
-                cmidx=trg_to_root.indexOf(scr_to_root.get(i));
-                break;
+                //  if (trg_to_root.contains(scr_to_root.get(i))){
+                if (trg_to_root.contains(scr_to_root.get(i))) {
+
+                    sb.append("!down!");
+                    cmidx = trg_to_root.indexOf(scr_to_root.get(i));
+                    break;
+                } else
+                    sb.append("!up!");
             }
-            else
-                sb.append("!up!");
-        }
-        for (int j=cmidx-1;j>=0;j--)
-        {
-            sb.append(trg_to_root.get(j).getData(d));
-            sb.append("!down!");
-        }
+            for (int j = cmidx - 1; j >= 0; j--) {
+                sb.append(trg_to_root.get(j).getData(d));
+                sb.append("!down!");
+            }
+
+
+
 
 
         /*
@@ -243,6 +245,7 @@ public class DependencyUtil {
         return arr;
     }*/
 
+    /*
     private  static Tuple2<List<Word>,List<Integer>> getPathToRoot(Word w){
         //    Sentence s = w.getSentence();
         List<Word> arr = new ArrayList<>();
@@ -260,7 +263,22 @@ public class DependencyUtil {
         arrIdx.add(tmp.getId());
         return new Tuple2<>(arr,arrIdx);
     }
+*/
 
+    private  static List<Word> getPathToRoot(Word w){
+        //    Sentence s = w.getSentence();
+        List<Word> arr = new ArrayList<>();
+
+        Word tmp =w;
+        while (!tmp.getHead().equals("0")){  //not root
+
+            arr.add(tmp);
+            tmp = getHead(tmp);
+        }
+
+        arr.add(tmp);
+        return arr;
+    }
 
 /*
     public class DependencyPathElement{
