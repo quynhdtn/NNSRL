@@ -54,6 +54,8 @@ public class FeatureGenerator {
                             Feature f = getFeature(fn, fea_attrs);
                             try {
                                 f.loadFromFile(filePath.toAbsolutePath().toString());
+                                if (Files.exists(Paths.get(filePath.getParent().toAbsolutePath()+"/" + filePath.getFileName().toString()+".txt")))
+                                    f.loadCacheFromFile(filePath.getParent().toAbsolutePath()+"/" + filePath.getFileName().toString()+".txt");
                                 featureList.add(f);
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -86,6 +88,9 @@ public class FeatureGenerator {
 
                             try {
                                 cf.loadFromFile(filePath.toAbsolutePath().toString());
+                                if (Files.exists(Paths.get(filePath.getParent().toAbsolutePath()+"/" + filePath.getFileName().toString()+".txt")))
+                                    cf.loadCacheFromFile(filePath.getParent().toAbsolutePath()+"/" + filePath.getFileName().toString()+".txt");
+
                                 featureList.add(cf);
                             } catch (IOException e) {
                                 e.printStackTrace();

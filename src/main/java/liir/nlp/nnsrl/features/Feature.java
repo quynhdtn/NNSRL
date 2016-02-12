@@ -18,6 +18,8 @@ public abstract class Feature implements Comparable<Feature> {
 
     String unkown_value="!UNKOWN!";
 
+    List<List<Integer>> value_caches;
+
     public Feature(FeatureName name){
         this.name=name;
         vocabulary = new ArrayList<String>();
@@ -38,6 +40,39 @@ public abstract class Feature implements Comparable<Feature> {
 
     }
 
+
+    //load a vob
+    public void loadCacheFromFile(String path) throws IOException {
+        this.value_caches=new ArrayList<>();
+        List<String> vals = Files.readAllLines(Paths.get(path));
+        for (String v : vals){
+           String[] tmps =v.split("\\s+");
+            if (tmps.length>0){
+                if (tmps[0].equals("_"))
+                {
+                    List<Integer> vi = new ArrayList<>();
+                    value_caches.add(vi);
+                }
+                else{
+                    List<Integer> vi = new ArrayList<>();
+
+                    for (int i=0;i<tmps.length;i++)
+                    {
+                        String[] tmps1= tmps[i].split(":");
+                        if (tmps1.length==2){
+                            int k =  Integer.parseInt(tmps1[1]);
+                            if (k>0)
+                                vi.add(Integer.parseInt(tmps1[0]));
+                        }
+                    }
+                    value_caches.add(vi);
+                }
+            }
+
+        }
+
+
+    }
 
     public FeatureName getName() {
         return name;
@@ -275,6 +310,9 @@ public abstract class Feature implements Comparable<Feature> {
         return null;
     }
 
+    public List<List<Integer>> getValue_caches() {
+        return value_caches;
+    }
 
     @Override
     public int compareTo(Feature other){

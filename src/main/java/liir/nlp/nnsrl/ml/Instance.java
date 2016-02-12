@@ -48,6 +48,16 @@ public class Instance {
         featureCaches.put(f.getName(), v);
     }
 
+    public void extractFeature(Feature f, List<Integer> vfromcache){
+
+
+        List<String> values = new ArrayList<>();
+        for (int t : vfromcache)
+        values.add(f.getVocabulary().get(t));
+
+
+        featureCaches.put(f.getName(), values);
+    }
 
 
     public Object getFeature(FeatureName fn){
