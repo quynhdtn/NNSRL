@@ -28,8 +28,17 @@ public class DataSet extends ArrayList<Tuple2<Instance, String>> {
     }
 
     public void extractFeature(Feature f){
+        final int[] c = {0};
+        System.out.println( "total number of instances: ");
+        System.out.println( this.size());
 
-            this.forEach(ins -> ins._1().extractFeature(f));
+        this.forEach(ins ->{
+                ins._1().extractFeature(f);
+                c[0]++;
+                if (c[0] %100000 ==0 )
+                {  System.out.print("Have processed ");
+                System.out.println(c[0]);}
+            });
     }
 
 
@@ -88,7 +97,7 @@ public class DataSet extends ArrayList<Tuple2<Instance, String>> {
 
         });
 
-        /*
+
         fl.forEach(fea -> {
             lines.clear();
 
@@ -114,7 +123,7 @@ public class DataSet extends ArrayList<Tuple2<Instance, String>> {
 
         });
 
-*/
+
     }
 
     public Float[][] getData(){

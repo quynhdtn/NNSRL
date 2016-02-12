@@ -47,16 +47,16 @@ public class Pipeline {
     }
 
     public static void main(String[] args) throws IOException {
-       Pipeline srl  = new Pipeline("/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/feas_lund","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/temps","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/scripts");
-     //   Pipeline srl  = new Pipeline("/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/temps","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/temps","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/scripts");
+     //  Pipeline srl  = new Pipeline("/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/feas_lund","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/temps2","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/scripts");
+        Pipeline srl  = new Pipeline("/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/temps2","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/temps2","/Users/quynhdo/Documents/WORKING/PhD/workspace/WE/NNSRL/scripts");
 
         String input = "/Users/quynhdo/Documents/WORKING/MYWORK/EACL/CoNLL2009-ST-English2/CoNLL2009-ST-English-evaluation-ood.txt";
-        CoNLL2009Reader cr = new CoNLL2009Reader(new File(input), false);
+        CoNLL2009Reader cr = new CoNLL2009NoLabelReader(new File(input), false);
 
         List<Sentence> sens= cr.readAll();
 
         System.out.println(sens.size());
-//      srl.predict(sens);
+       srl.predict(sens);
 
 
 
@@ -71,7 +71,7 @@ public class Pipeline {
             for (Predicate p: s.getPredicates())
                 if (p.getArgmap().size()>0)
                     System.out.println("ok");
-      srl.train(sens);
+  //    srl.train(sens);
 
     }
 }

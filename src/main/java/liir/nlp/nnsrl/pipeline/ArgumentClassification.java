@@ -84,7 +84,7 @@ public class ArgumentClassification extends Step{
 
             if (p.getPos().startsWith("V")){
 
-                for (String wid : p.getArgmap().keySet()){
+                for (int wid : p.getArgmap().keySet()){
                     Instance ins = new Instance(new Tuple2<Word,Predicate>(s.getWord(wid),p));
                     ins.setUsed_for_training(false);
                     ds_V.add(new Tuple2<>(ins, neural_label));
@@ -95,7 +95,7 @@ public class ArgumentClassification extends Step{
 
             if (p.getPos().startsWith("N")) {
 
-                for (String wid : p.getArgmap().keySet()) {
+                for (int wid : p.getArgmap().keySet()) {
                     Instance ins = new Instance(new Tuple2<Word,Predicate>( s.getWord(wid),p));
                     ins.setUsed_for_training(false);
                     ds_N.add(new Tuple2<>(ins, neural_label));

@@ -1,5 +1,6 @@
 package liir.nlp.core.representation;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import liir.nlp.utils.WordData;
 
 import java.lang.reflect.InvocationTargetException;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by quynhdo on 28/08/15.
  */
 public class Word {
-    String id="";
+    int id=0;
     String str="";
     String lemma="";
     String pos="";
@@ -27,13 +28,20 @@ public class Word {
 
     HashMap<String,Object> otherFeatures;
 
+    List<Word> path_to_root=null;
 
+    public void setPath_to_root(List<Word> path_to_root) {
+        this.path_to_root = path_to_root;
+    }
 
+    public List<Word> getPath_to_root() {
 
+        return path_to_root;
+    }
 
     public Word(){}
-    public Word(String id, String str, String lemma, String pos, String head, String deprel, Sentence sentence) {
-        if (id!=null)
+    public Word(int id, String str, String lemma, String pos, String head, String deprel, Sentence sentence) {
+        if (id!=-1)
             this.id = id;
         if (str!=null)
             this.str = str;
@@ -86,7 +94,7 @@ public class Word {
         return s;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -114,7 +122,7 @@ public class Word {
         this.sentence = sentence; this.index = this.sentence.indexOf(this);
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -255,6 +263,69 @@ public class Word {
 
     public void addChild(Word w){
         children.add(w);
+    }
+
+
+
+    public List<Word> getPathToRoot(){
+        List<Word> path;
+        if (this.head.equals("0"))
+        {
+            path=new ArrayList<>();
+            path.add(this);
+            return path;
+        }
+        path = this.headWord.getPathToRoot();
+        path.add(this);
+        return path;
+    }
+
+
+    public String getPath(Word w, WordData d){
+        List<Word> scr_to_root = getPathToRoot();
+        List<Word> trg_to_root = w.getPathToRoot();
+
+
+        int commonIndex=0;
+
+        StringBuilder sb=new StringBuilder();
+        int s1 = scr_to_root.size();
+        int s2 = trg_to_root.size();
+        int min=(s1<s2?s1:s2);
+
+
+        for (int i=0;i<min;++i){
+            if(scr_to_root.get(i)==trg_to_root.get(i))
+            {
+                commonIndex = i;
+                break;
+            }
+
+        }
+
+
+        for (int i=s1-1;i>=commonIndex+1; i--)
+        {
+
+            sb.append(scr_to_root.get(i).getData(d));
+            sb.append("!up!");
+
+        }
+
+        sb.append(scr_to_root.get(commonIndex).getData(d));
+        sb.append("!down!");
+
+        for (int i=commonIndex+1;i<s2; i++)
+        {
+
+            sb.append("!down!");
+            sb.append(trg_to_root.get(i).getData(d));
+
+        }
+
+
+        return sb.toString();
+
     }
 
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

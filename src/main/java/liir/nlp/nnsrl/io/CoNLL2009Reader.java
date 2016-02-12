@@ -94,7 +94,7 @@ public class CoNLL2009Reader implements Iterable<Sentence> {
             String[] cols=WHITESPACE_PATTERN.split(line);
             if(cols[12].charAt(0)=='Y'){
                 Word w = new Word();
-                w.setId(cols[0]);
+                w.setId(Integer.parseInt(cols[0])-1);
                 w.setStr(cols[1]);
                 if (!use_gold) {
                     w.setLemma(cols[3]);
@@ -126,7 +126,7 @@ public class CoNLL2009Reader implements Iterable<Sentence> {
 
             } else {
                 nextWord = new Word();
-                nextWord.setId(cols[0]);
+                nextWord.setId(Integer.parseInt(cols[0])-1);
                 nextWord.setStr(cols[1]);
                 if (!use_gold) {
                     nextWord.setLemma(cols[3]);
@@ -163,24 +163,24 @@ public class CoNLL2009Reader implements Iterable<Sentence> {
     }
 
     protected void buildDependencyTree(Sentence s){
-        for(int i=0;i<s.size();++i){
-            int hIdx = Integer.parseInt(s.get(i).getHead());
-            if (hIdx>=1)
-            {
-                s.get(i).setHeadWord(s.get(hIdx-1));
-                s.get(hIdx-1).addChild(s.get(i));
+
+        s.forEach(w -> {
+            int hidx = Integer.parseInt(w.getHead());
+            if (hidx >= 1){
+                w.setHeadWord(s.get(hidx-1));
+                s.get(hidx-1).addChild(w);
             }
+        });
 
-        }
 
-        }
+    }
     protected void buildSemanticTree(Sentence s, List<String[]> argscache){
         for(int i=0;i<s.getPredicates().size();++i){
             Predicate pred=s.getPredicates().get(i);
             for(int j=0;j<s.size();++j){
                 String arg=argscache.get(j)[i];
                 if(!arg.equals("_"))
-                    pred.addArgument(s.get(j).getId(), arg); //store the index of the argument word in pred argumnet, it may be different when we move to another dataset
+                    pred.addArgument(j, arg); //store the index of the argument word in pred argumnet, it may be different when we move to another dataset
             }
         }
 

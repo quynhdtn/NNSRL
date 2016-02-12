@@ -51,12 +51,9 @@ public class Sentence extends ArrayList<Word> {
 
 
 
-    public Word getWord(String wId){
+    public Word getWord(int wId){
 
-        for (Word w : this)
-            if (w.getId().equals(wId))
-                return w;
-        return null;
+        return this.get(wId);
     }
     public String toXMLString(){
         StringBuilder sb = new StringBuilder();

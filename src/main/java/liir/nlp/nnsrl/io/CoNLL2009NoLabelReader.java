@@ -26,7 +26,7 @@ public class CoNLL2009NoLabelReader extends CoNLL2009Reader{
             String[] cols=WHITESPACE_PATTERN.split(line);
 
                 nextWord = new Word();
-                nextWord.setId(cols[0]);
+                nextWord.setId(Integer.parseInt(cols[0])-1);
                 nextWord.setStr(cols[1]);
                 if (!use_gold) {
                     nextWord.setLemma(cols[3]);

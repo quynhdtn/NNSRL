@@ -12,7 +12,7 @@ import java.util.List;
 public class Predicate extends Word {
 
     String sense;
-    HashMap<String,String> argmap; //<Argument ID (Mention or Word), Label>
+    HashMap<Integer,String> argmap; //<Argument ID (Mention or Word), Label>
 
     public Predicate(Word w) {
 
@@ -22,11 +22,11 @@ public class Predicate extends Word {
 
     }
 
-    public void addArgument(String argId, String label){
+    public void addArgument(Integer argId, String label){
         argmap.put(argId,label);
     }
 
-    public String getLabel (String argId){
+    public String getLabel (int argId){
         return argmap.get(argId);
     }
 
@@ -39,9 +39,9 @@ public class Predicate extends Word {
         return sense;
     }
 
-    public List<String> getArgument(String label){
-        List<String> arr = new ArrayList<>();
-        for (String k : argmap.keySet()){
+    public List<Integer> getArgument(String label){
+        List<Integer> arr = new ArrayList<>();
+        for (int k : argmap.keySet()){
             if (argmap.get(k).toUpperCase().equals(label)){
                 arr.add(k);
 
@@ -51,7 +51,7 @@ public class Predicate extends Word {
         return arr;
     }
 
-    public HashMap<String, String> getArgmap() {
+    public HashMap<Integer, String> getArgmap() {
         return argmap;
     }
 

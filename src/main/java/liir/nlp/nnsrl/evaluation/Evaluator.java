@@ -247,7 +247,7 @@ public class Evaluator {
             ArrayList<String> lbls =  new ArrayList<>();
             for (Sentence s :sys){
                 for (Predicate p :  s.getPredicates()){
-                    for (String arg : p.getArgmap().keySet()){
+                    for (int arg : p.getArgmap().keySet()){
                         if (!lbls.contains(p.getLabel(arg)))
                             lbls.add(p.getLabel(arg));
 
@@ -258,7 +258,7 @@ public class Evaluator {
 
             for (Sentence s :gold){
                 for (Predicate p :  s.getPredicates()){
-                    for (String arg : p.getArgmap().keySet()){
+                    for (int arg : p.getArgmap().keySet()){
                         if (!lbls.contains(p.getLabel(arg)))
                             lbls.add(p.getLabel(arg));
 
@@ -298,8 +298,8 @@ public class Evaluator {
                             if (p.getSense().equals(gp.getSense()))
                                 senseCount++;
 
-                            HashMap<String, String> args = p.getArgmap();
-                            HashMap<String, String> gargs = gp.getArgmap();
+                            HashMap<Integer, String> args = p.getArgmap();
+                            HashMap<Integer, String> gargs = gp.getArgmap();
                             final ArrayList<String> finalLbls = finalLbls1;
                             args.keySet().forEach(arg -> {
                                 int pidx = finalLbls.indexOf(args.get(arg));
@@ -364,8 +364,8 @@ public class Evaluator {
                                 if (p.getSense().equals(gp.getSense()))
                                     senseCount++;
 
-                                HashMap<String, String> args = p.getArgmap();
-                                HashMap<String, String> gargs = gp.getArgmap();
+                                HashMap<Integer, String> args = p.getArgmap();
+                                HashMap<Integer, String> gargs = gp.getArgmap();
                                 args.keySet().forEach(arg -> {
                                     if (gargs.containsKey(arg)) {
                                         argCount++;
