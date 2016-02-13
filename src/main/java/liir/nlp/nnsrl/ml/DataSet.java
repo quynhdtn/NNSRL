@@ -28,12 +28,38 @@ public class DataSet extends ArrayList<Tuple2<Instance, String>> {
     }
 
     public void extractFeature(Feature f){
-        if (f.getValue_caches()!=null){
-            if (f.getValue_caches().size() == this.size()){
+
+        if(this.get(0)._1().used_for_training && f.getValue_caches()!=null && f.getValue_caches().size() == this.size()){
+
                 System.out.println("Loading feature value from file!");
                 for (int i=0;i<this.size();i++)
                     this.get(i)._1().extractFeature(f, f.getValue_caches().get(i));
-            }
+
+        }
+        else {
+            final int[] c = {0};
+            System.out.println("total number of instances: ");
+            System.out.println(this.size());
+
+            this.forEach(ins -> {
+                ins._1().extractFeature(f);
+                c[0]++;
+                if (c[0] % 100000 == 0) {
+                    System.out.print("Have processed ");
+                    System.out.println(c[0]);
+                }
+            });
+        }
+    }
+
+    public void extractFeature(Feature f, boolean readCache){
+        if(this.get(0)._1().used_for_training && f.getValue_caches()!=null && f.getValue_caches().size() == this.size()
+                && readCache){
+
+            System.out.println("Loading feature value from file!");
+            for (int i=0;i<this.size();i++)
+                this.get(i)._1().extractFeature(f, f.getValue_caches().get(i));
+
         }
         else {
             final int[] c = {0};

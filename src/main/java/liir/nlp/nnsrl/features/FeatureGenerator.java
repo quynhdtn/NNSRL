@@ -54,8 +54,9 @@ public class FeatureGenerator {
                             Feature f = getFeature(fn, fea_attrs);
                             try {
                                 f.loadFromFile(filePath.toAbsolutePath().toString());
-                                if (Files.exists(Paths.get(filePath.getParent().toAbsolutePath()+"/" + filePath.getFileName().toString()+".txt")))
-                                    f.loadCacheFromFile(filePath.getParent().toAbsolutePath()+"/" + filePath.getFileName().toString()+".txt");
+                                System.out.println( filePath.getParent().getParent()+"/" + name+".txt");
+                                if (Files.exists(Paths.get(filePath.getParent().getParent()+"/" + name+".txt")) && ! name.endsWith("WE"))
+                                    f.loadCacheFromFile(filePath.getParent().getParent()+"/" + name+".txt");
                                 featureList.add(f);
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -88,8 +89,8 @@ public class FeatureGenerator {
 
                             try {
                                 cf.loadFromFile(filePath.toAbsolutePath().toString());
-                                if (Files.exists(Paths.get(filePath.getParent().toAbsolutePath()+"/" + filePath.getFileName().toString()+".txt")))
-                                    cf.loadCacheFromFile(filePath.getParent().toAbsolutePath()+"/" + filePath.getFileName().toString()+".txt");
+                                if (Files.exists(Paths.get(filePath.getParent().getParent()+"/" + name+".txt"))  && ! name.endsWith("WE"))
+                                    cf.loadCacheFromFile(filePath.getParent().getParent()+"/" + name+".txt");
 
                                 featureList.add(cf);
                             } catch (IOException e) {
@@ -214,6 +215,18 @@ public class FeatureGenerator {
             long startTime = System.currentTimeMillis();
             System.out.println("Extracting feature " + f.getName().toString());
             ds.extractFeature(f);
+            long endTime = System.currentTimeMillis();
+            System.out.println(endTime-startTime);
+        });
+    }
+
+    public void extractFeature(DataSet ds, boolean readCache){
+        //      cacheFeatureList.forEach(f -> ds.extractFeature(f));
+
+        featureList.forEach(f -> {
+            long startTime = System.currentTimeMillis();
+            System.out.println("Extracting feature " + f.getName().toString());
+            ds.extractFeature(f, readCache);
             long endTime = System.currentTimeMillis();
             System.out.println(endTime-startTime);
         });

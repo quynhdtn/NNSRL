@@ -19,12 +19,22 @@ public class Word {
     String pos="";
     String head="";
     String deprel="";
+
+    public void setWord_form(String word_form) {
+        this.word_form = word_form;
+    }
+
     Sentence sentence;
     int index;
 
     Word headWord=null;
     List<Word> children = new ArrayList<>();
 
+    String word_form="";
+
+    public String getWord_form() {
+        return word_form;
+    }
 
     HashMap<String,Object> otherFeatures;
 
@@ -193,7 +203,7 @@ public class Word {
 
     public String getData(WordData d){
         switch (d){
-            case word: return str.toLowerCase();
+            case word: return word_form;
             case pos: return pos;
             case lemma: return lemma;
             case deprel: return deprel;

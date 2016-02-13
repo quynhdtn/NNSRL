@@ -96,6 +96,8 @@ public class CoNLL2009Reader implements Iterable<Sentence> {
                 Word w = new Word();
                 w.setId(Integer.parseInt(cols[0])-1);
                 w.setStr(cols[1]);
+                w.setWord_form(cols[1].toLowerCase());
+
                 if (!use_gold) {
                     w.setLemma(cols[3]);
                     w.setPos(cols[5]);
@@ -111,7 +113,7 @@ public class CoNLL2009Reader implements Iterable<Sentence> {
                 Predicate pred=new Predicate(w);
                 nextWord=pred;
 
-                pred.setSense(cols[13].split("\\.")[1]);
+                pred.setSense(pred.getLemma() +"." + cols[13].split("\\.")[1]);
 
                 if(cols.length>=14){
 
@@ -128,6 +130,7 @@ public class CoNLL2009Reader implements Iterable<Sentence> {
                 nextWord = new Word();
                 nextWord.setId(Integer.parseInt(cols[0])-1);
                 nextWord.setStr(cols[1]);
+                nextWord.setWord_form(cols[1].toLowerCase());
                 if (!use_gold) {
                     nextWord.setLemma(cols[3]);
                     nextWord.setPos(cols[5]);

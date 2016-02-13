@@ -26,6 +26,11 @@ public class Problem {
     String train_script_path = "";
     String test_file = "test.forsvm.txt";
     String test_output = "test.out.txt";
+    boolean readValueCache=true;
+
+    public void setReadValueCache(boolean readValueCache) {
+        this.readValueCache = readValueCache;
+    }
 
     public Problem(FeatureGenerator fg, String temp_folder, String train_script_path){
         this.fg =  fg;
@@ -48,7 +53,11 @@ public class Problem {
 
     public void train(DataSet ds){
 
+
+        if (readValueCache)
         fg.extractFeature(ds);
+        else
+        fg.extractFeature(ds, false);
         try {
 
             if (!Files.exists(Paths.get(temp_folder +File.separator + this.train_folder_name)))

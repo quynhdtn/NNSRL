@@ -81,6 +81,7 @@ public class PredicateDisambiguation extends Step{
 
     @Override
     public void train(List<Sentence> sens)  {
+        this.probs.values().forEach(p -> p.setReadValueCache(false));
 
         List<String> pred_references_V =  new ArrayList<>();
         List<String> pred_references_N =  new ArrayList<>();

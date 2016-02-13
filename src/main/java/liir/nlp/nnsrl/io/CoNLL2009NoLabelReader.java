@@ -28,6 +28,7 @@ public class CoNLL2009NoLabelReader extends CoNLL2009Reader{
                 nextWord = new Word();
                 nextWord.setId(Integer.parseInt(cols[0])-1);
                 nextWord.setStr(cols[1]);
+            nextWord.setWord_form(cols[1].toLowerCase());
                 if (!use_gold) {
                     nextWord.setLemma(cols[3]);
                     nextWord.setPos(cols[5]);

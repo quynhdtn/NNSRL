@@ -127,7 +127,7 @@ public class EvaluationTest {
         */
 
  //    String sys1 = "/Users/quynhdo/Documents/WORKING/PhD/NNSRL/Lund/ood.txt";
-       String sys1="/Users/quynhdo/Desktop/ood_ood.txt";
+       String sys1="/Users/quynhdo/Desktop/10pc_ood.txt";
     //    String sys1 = "/Users/quynhdo/Documents/WORKING/PhD/NNSRL/Lund/produce/ood.new.txt";
       //  String sys1 = "/Users/quynhdo/Documents/WORKING/PhD/NNSRL/Lund/origin_nobrown/eval_pi.txt";
         String sys2 = "/Users/quynhdo/Documents/WORKING/PhD/NNSRL/Lund/origin_nobrown/ood.txt";
