@@ -113,7 +113,7 @@ public class CoNLL2009Reader implements Iterable<Sentence> {
                 Predicate pred=new Predicate(w);
                 nextWord=pred;
 
-                pred.setSense(pred.getLemma() +"." + cols[13].split("\\.")[1]);
+                pred.setSense(cols[13].split("\\.")[1]);
 
                 if(cols.length>=14){
 
@@ -166,12 +166,18 @@ public class CoNLL2009Reader implements Iterable<Sentence> {
     }
 
     protected void buildDependencyTree(Sentence s){
+        for (Word w : s) {
+            w.getSentence().forEach(ww -> {
+                if (Integer.parseInt(ww.getHead()) == w.getId() + 1)
+                    w.addChild(ww);
+            });
+        }
 
         s.forEach(w -> {
             int hidx = Integer.parseInt(w.getHead());
             if (hidx >= 1){
                 w.setHeadWord(s.get(hidx-1));
-                s.get(hidx-1).addChild(w);
+             //   s.get(hidx-1).addChild(w);
             }
         });
 

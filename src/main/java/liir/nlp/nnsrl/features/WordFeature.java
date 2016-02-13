@@ -91,12 +91,17 @@ public class WordFeature  extends Feature{
 
     private Set<String> getChildrenFeature(Word w, WordData wd){
 
+        /*
         if (w.getFeatureAsObject("children") == null){
             List<Word> children =  DependencyUtil.getChildren(w);
             w.addObjectFeature("children", children);
         }
         Set<String> rs=new TreeSet<>();
-        List<Word> childrens = (List<Word>) w.getFeatureAsObject("children");
+        List<Word> childrens = (List<Word>) w.getFeatureAsObject("children");*/
+
+        List<Word> childrens = w.getChildren();
+        Set<String> rs=new TreeSet<>();
+
         childrens.forEach(c -> rs.add(c.getData(wd)));
         return rs;
 
@@ -105,16 +110,24 @@ public class WordFeature  extends Feature{
 
     private Set<String> getChildrenFeature(Word w, WordData wd1, WordData wd2){
 
+        /*
         if (w.getFeatureAsObject("children") == null){
             List<Word> children =  DependencyUtil.getChildren(w);
             w.addObjectFeature("children", children);
         }
         Set<String> rs=new TreeSet<>();
-        List<Word> childrens = (List<Word>) w.getFeatureAsObject("children");
+        List<Word> childrens = (List<Word>) w.getFeatureAsObject("children");*/
+        List<Word> childrens = w.getChildren();
+        Set<String> rs=new TreeSet<>();
+
         childrens.forEach(c -> {
+            StringBuilder sb=new StringBuilder();
             String v1=c.getData(wd1);
             String v2=c.getData(wd2);
-            rs.add(v1 + "_" + v2);
+            sb.append(v1);
+            sb.append("_");
+            sb.append(v2);
+            rs.add(sb.toString());
         });
         return rs;
 
@@ -124,12 +137,14 @@ public class WordFeature  extends Feature{
      // get the subcategorization-frame feature =  sequence of dependency label of w’s children in the dependency tree.
     public String getDepSubCat(Word w){
 
+        /*
         if (w.getFeatureAsObject("children") == null){
             List<Word> children =  DependencyUtil.getChildren(w);
             w.addObjectFeature("children", children);
         }
-        List<Word> childrens = (List<Word>) w.getFeatureAsObject("children");
+        List<Word> childrens = (List<Word>) w.getFeatureAsObject("children");*/
 
+        List<Word> childrens = w.getChildren();
         StringBuilder sb = new StringBuilder();
         childrens.forEach(c -> {
             sb.append(c.getDeprel());

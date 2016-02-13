@@ -41,7 +41,7 @@ public class PredicateFeature extends Feature {
             return null;
 
         switch (pd){
-            case sense: return p.getSense();
+            case sense: return p.getLemma() + "." + p.getSense();
 
         }
         return null;
